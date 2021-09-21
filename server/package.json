@@ -1,0 +1,25 @@
+{
+  "name": "looking-for-group",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nickjohn18/Looking-For-Group.git"
+  },
+  "author": "Nick John",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nickjohn18/Looking-For-Group/issues"
+  },
+  "homepage": "https://github.com/Nickjohn18/Looking-For-Group#readme",
+  "dependencies": {
+    "apollo-server-express": "^3.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.7"
+  }
+}
