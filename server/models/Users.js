@@ -30,6 +30,12 @@ const userSchema = new Schema(
         ref: "User",
       },
     ],
+    tags: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Tag",
+      },
+    ],
   },
   {
     toJSON: {

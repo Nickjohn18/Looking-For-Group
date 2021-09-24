@@ -8,6 +8,10 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
+    gamerTag: {
+      type: String,
+      required: true,
+    },
     userPost: {
       type: String,
       required: "You need to post something!",
@@ -19,6 +23,9 @@ const postSchema = new Schema(
       default: Date.now,
       get: (timestamp) => dateFormat(timestamp),
     },
+
+    genreTag: {},
+
     comments: [commentSchema],
   },
   {
@@ -34,4 +41,4 @@ postSchema.virtual("commentCount").get(function () {
 
 const Post = model("Post", postSchema);
 
-module.exports = postSchema;
+module.exports = Post;
