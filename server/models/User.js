@@ -1,5 +1,6 @@
-const { Schema } = require("mongoose");
+const { Schema, model } = require("mongoose");
 const postSchema = require("./Post");
+const bcrypt = require("bcrypt");
 
 const userSchema = new Schema(
   {
@@ -7,6 +8,16 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
+    },
+    firstName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+      trim: true,
     },
     email: {
       type: String,

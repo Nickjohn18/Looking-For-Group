@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "concurrently": "^6.2.1",
+    "graphql": "^15.6.0",
+    "nodemon": "^2.0.13"
+  },
+  "name": "looking-for-group",
+  "version": "1.0.0",
+  "description": "Final Project",
+  "main": "server/server.js",
+  "devDependencies": {
+    "concurrently": "^6.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "build": "cd client && npm run build",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd my-app && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nickjohn18/Looking-For-Group.git"
+  },
+  "author": "Nick John",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nickjohn18/Looking-For-Group/issues"
+  },
+  "homepage": "https://github.com/Nickjohn18/Looking-For-Group#readme"
+}
