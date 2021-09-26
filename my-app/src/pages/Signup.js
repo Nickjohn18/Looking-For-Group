@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { ADD_USER } from "../utils/mutations";
 import { Container } from "@mui/material";
+import { Box } from "@mui/system";
 
 import Auth from "../utils/auth";
 
@@ -41,67 +42,110 @@ const Signup = () => {
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <Container>
-        <div className="col-12 col-md-6">
-          <div className="card">
-            <h4 className="card-header">Sign Up</h4>
-            <div className="card-body">
-              <form onSubmit={handleFormSubmit}>
+    <main
+      style={{ marginLeft: "25%", marginBottom: "100px", marginTop: "50px" }}
+    >
+      <Container style={{ textAlign: "center", color: "white" }}>
+        <Box sx={{ bgcolor: "#42a5f5", width: 700, height: 700 }}>
+          <h1
+            style={{
+              borderBottom: "solid",
+              display: "inline-block",
+            }}
+          >
+            SIGN UP
+          </h1>
+          <p>Please Fill Out Information Below*</p>
+          <Box style={{ textAlign: "center", width: 500, marginLeft: "15%" }}>
+            <form onSubmit={handleFormSubmit}>
+              <p>Please Enter Your Name*</p>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  marginTop: "30px",
+                }}
+              >
                 <input
                   className="form-input"
-                  placeholder="Your First Name"
+                  placeholder="First Name"
                   name="firstName"
                   type="firstName"
                   id="firstName"
                   value={formState.firstName}
                   onChange={handleChange}
+                  style={{ width: "43%", height: "50px" }}
                 />
                 <input
                   className="form-input"
-                  placeholder="Your Last Name"
+                  placeholder="Last Name"
                   name="lastName"
                   type="lastName"
                   id="lastName"
                   value={formState.lastName}
                   onChange={handleChange}
+                  style={{ width: "43%", height: "50px" }}
                 />
+              </div>
+              <div style={{ marginTop: "30px" }}>
+                <p>Username*</p>
                 <input
                   className="form-input"
-                  placeholder="Your username"
+                  placeholder="username"
                   name="username"
                   type="username"
                   id="username"
                   value={formState.username}
                   onChange={handleChange}
+                  style={{ width: "100%", height: "50px" }}
                 />
+              </div>
+              <div style={{ marginTop: "30px" }}>
+                <p>Email*</p>
                 <input
                   className="form-input"
-                  placeholder="Your email"
+                  placeholder="email"
                   name="email"
                   type="email"
                   id="email"
                   value={formState.email}
                   onChange={handleChange}
+                  style={{ width: "100%", height: "50px" }}
                 />
+              </div>
+              <div style={{ marginTop: "30px" }}>
+                <p>Password*</p>
+
                 <input
                   className="form-input"
-                  placeholder="******"
+                  placeholder="Enter Your Password"
                   name="password"
                   type="password"
                   id="password"
                   value={formState.password}
                   onChange={handleChange}
+                  style={{ width: "100%", height: "50px" }}
                 />
-                <button className="btn d-block w-100" type="submit">
-                  Submit
-                </button>
-              </form>
+              </div>
+              <button
+                type="submit"
+                style={{
+                  marginTop: "15px",
+                  backgroundColor: "#1565c0",
+                  border: "none",
+                  display: "inline-block",
+                  width: "50%",
+                  height: "50px",
+                  color: "white",
+                }}
+              >
+                SIGN UP
+              </button>
+            </form>
 
-              {error && <div>Signup failed</div>}
-            </div>
-          </div>
-        </div>
+            {error && <div>Signup failed</div>}
+          </Box>
+        </Box>
       </Container>
     </main>
   );

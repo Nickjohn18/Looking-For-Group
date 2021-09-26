@@ -20,9 +20,9 @@ export default function ProductHero() {
         <Typography
           color="#eeeeee"
           align="center"
-          variant="h2"
+          variant="h3"
           marked="center"
-          style={{ position: "absolute", bottom: "700px", left: "800px" }}
+          style={{ position: "absolute", bottom: "650px", left: "790px" }}
         >
           Welcome To LFG!
         </Typography>

@@ -192,19 +192,19 @@ const Header = () => {
               Looking For Gamers
             </Link>
           </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {Auth.loggedIn() ? (
               <>
+                <Search style={{ marginRight: "50px" }}>
+                  <SearchIconWrapper>
+                    <SearchIcon />
+                  </SearchIconWrapper>
+                  <StyledInputBase
+                    placeholder="Search…"
+                    inputProps={{ "aria-label": "search" }}
+                  />
+                </Search>
                 <Typography
                   variant="h6"
                   noWrap
@@ -217,7 +217,7 @@ const Header = () => {
                     to="/home"
                     style={{ textDecoration: "none", color: "white" }}
                   >
-                    Home
+                    HOME
                   </Link>
                 </Typography>
                 <Typography
@@ -232,7 +232,7 @@ const Header = () => {
                     to="/profile"
                     style={{ textDecoration: "none", color: "white" }}
                   >
-                    Profile
+                    PROFILE
                   </Link>
                 </Typography>
                 <Typography
@@ -247,7 +247,7 @@ const Header = () => {
                     onClick={logout}
                     style={{ textDecoration: "none", color: "white" }}
                   >
-                    Logout
+                    LOGOUT
                   </a>
                 </Typography>
               </>
@@ -265,7 +265,7 @@ const Header = () => {
                       to="/login"
                       style={{ textDecoration: "none", color: "white" }}
                     >
-                      Login
+                      SIGN IN
                     </Link>
                     <Badge color="error">
                       <Login />
@@ -282,7 +282,7 @@ const Header = () => {
                       to="/signup"
                       style={{ textDecoration: "none", color: "white" }}
                     >
-                      Sign Up
+                      SIGN UP
                     </Link>
                     <AddCircleIcon />
                   </Badge>

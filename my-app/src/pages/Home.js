@@ -37,7 +37,7 @@ const Home = () => {
             </div>
             <div>
               <div>
-                <Container>
+                <Container style={{ marginTop: "60px", marginBottom: "60px" }}>
                   <Grid container spacing={3}>
                     <Grid item xs={4}>
                       <AssignmentIcon sx={{ fontSize: 100 }} />
