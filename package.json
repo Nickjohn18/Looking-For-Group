@@ -14,8 +14,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install": "cd server && npm i && cd ../client && npm i",
-    "build": "cd client && npm run build",
+    "install": "cd server && npm i && cd ../my-app && npm i",
+    "build": "cd my-app && npm run build",
     "develop": "concurrently \"cd server && npm run watch\" \"cd my-app && npm start\""
   },
   "repository": {
