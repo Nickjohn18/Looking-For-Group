@@ -10,11 +10,7 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
           .populate("userPosts")
-          .populate("comments")
-          .populate({
-            path: "tags",
-            populate: { path: "posts", model: "Post" },
-          });
+          .populate("comments");
 
         return userData;
       }
@@ -47,6 +43,7 @@ const resolvers = {
 
       return { token, user };
     },
+
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -79,6 +76,15 @@ const resolvers = {
       }
 
       throw new AuthenticationError("You need to be logged in!");
+    },
+    updateUser: async (parent, args, context) => {
+      if (context.user) {
+        return await User.findByIdAndUpdate(context.user._id, args, {
+          new: true,
+        });
+      }
+
+      throw new AuthenticationError("Not logged in");
     },
     addComment: async (parent, { postId, commentBody }, context) => {
       if (context.user) {

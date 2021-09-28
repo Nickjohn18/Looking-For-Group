@@ -43,10 +43,22 @@ const Signup = () => {
 
   return (
     <main
-      style={{ marginLeft: "25%", marginBottom: "100px", marginTop: "50px" }}
+      style={{
+        backgroundColor: "#78909c",
+        backgroundImage:
+          "linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1))",
+      }}
     >
-      <Container style={{ textAlign: "center", color: "white" }}>
-        <Box sx={{ bgcolor: "#42a5f5", width: 700, height: 700 }}>
+      <Container
+        style={{
+          textAlign: "center",
+          color: "white",
+          paddingTop: "60px",
+          paddingBottom: "60px",
+          paddingLeft: "260px",
+        }}
+      >
+        <Box sx={{ bgcolor: "#78909c", width: 700, height: 700 }}>
           <h1
             style={{
               borderBottom: "solid",

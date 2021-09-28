@@ -45,8 +45,6 @@ export const ADD_POST = gql`
       postText
       createdAt
       username
-      gamerTag
-      commentCount
       comments {
         _id
       }

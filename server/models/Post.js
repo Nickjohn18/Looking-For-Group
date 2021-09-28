@@ -8,11 +8,7 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
-    gamerTag: {
-      type: String,
-      required: true,
-    },
-    userPost: {
+    postText: {
       type: String,
       required: "You need to post something!",
       minlength: 1,
@@ -23,9 +19,6 @@ const postSchema = new Schema(
       default: Date.now,
       get: (timestamp) => dateFormat(timestamp),
     },
-
-    genreTag: {},
-
     comments: [commentSchema],
   },
   {
@@ -35,9 +28,9 @@ const postSchema = new Schema(
   }
 );
 
-postSchema.virtual("commentCount").get(function () {
-  return this.reactions.length;
-});
+// postSchema.virtual("commentCount").get(function () {
+//   return this.comments.length;
+// });
 
 const Post = model("Post", postSchema);
 

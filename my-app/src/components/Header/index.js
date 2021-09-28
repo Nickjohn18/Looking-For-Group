@@ -172,142 +172,144 @@ const Header = () => {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          ></IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-              Looking For Gamers
-            </Link>
-          </Typography>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {Auth.loggedIn() ? (
-              <>
-                <Search style={{ marginRight: "50px" }}>
-                  <SearchIconWrapper>
-                    <SearchIcon />
-                  </SearchIconWrapper>
-                  <StyledInputBase
-                    placeholder="Search…"
-                    inputProps={{ "aria-label": "search" }}
-                  />
-                </Search>
-                <Typography
-                  variant="h6"
-                  noWrap
-                  component="div"
-                  sx={{ display: { xs: "none", sm: "block" } }}
-                  style={{ marginRight: "100px" }}
-                >
-                  <HomeIcon />
-                  <Link
-                    to="/home"
-                    style={{ textDecoration: "none", color: "white" }}
-                  >
-                    HOME
-                  </Link>
-                </Typography>
-                <Typography
-                  variant="h6"
-                  noWrap
-                  component="div"
-                  sx={{ display: { xs: "none", sm: "block" } }}
-                  style={{ marginRight: "100px" }}
-                >
-                  <PersonIcon />
-                  <Link
-                    to="/profile"
-                    style={{ textDecoration: "none", color: "white" }}
-                  >
-                    PROFILE
-                  </Link>
-                </Typography>
-                <Typography
-                  variant="h6"
-                  noWrap
-                  component="div"
-                  sx={{ display: { xs: "none", sm: "block" } }}
-                >
-                  <LogoutIcon />
-                  <a
-                    href="/"
-                    onClick={logout}
-                    style={{ textDecoration: "none", color: "white" }}
-                  >
-                    LOGOUT
-                  </a>
-                </Typography>
-              </>
-            ) : (
-              <>
-                <Typography
-                  variant="h6"
-                  noWrap
-                  component="div"
-                  sx={{ display: { xs: "none", sm: "block" } }}
-                  style={{ marginRight: "100px" }}
-                >
-                  <IconButton size="medium" color="inherit">
-                    <Link
-                      to="/login"
-                      style={{ textDecoration: "none", color: "white" }}
-                    >
-                      SIGN IN
-                    </Link>
-                    <Badge color="error">
-                      <Login />
-                    </Badge>
-                  </IconButton>
-                </Typography>
-                <IconButton
-                  size="lmedium"
-                  aria-label="show 4 new mails"
-                  color="inherit"
-                >
-                  <Badge color="error">
-                    <Link
-                      to="/signup"
-                      style={{ textDecoration: "none", color: "white" }}
-                    >
-                      SIGN UP
-                    </Link>
-                    <AddCircleIcon />
-                  </Badge>
-                </IconButton>
-              </>
-            )}
-            {/*  */}
-          </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+    <div>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
             <IconButton
               size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
+              edge="start"
               color="inherit"
+              aria-label="open drawer"
+              sx={{ mr: 2 }}
+            ></IconButton>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ display: { xs: "none", sm: "block" } }}
             >
-              <MoreIcon />
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
-    </Box>
+              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+                Looking For Gamers
+              </Link>
+            </Typography>
+            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ display: { xs: "none", md: "flex" } }}>
+              {Auth.loggedIn() ? (
+                <>
+                  <Search style={{ marginRight: "50px" }}>
+                    <SearchIconWrapper>
+                      <SearchIcon />
+                    </SearchIconWrapper>
+                    <StyledInputBase
+                      placeholder="Search…"
+                      inputProps={{ "aria-label": "search" }}
+                    />
+                  </Search>
+                  <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{ display: { xs: "none", sm: "block" } }}
+                    style={{ marginRight: "100px" }}
+                  >
+                    <HomeIcon />
+                    <Link
+                      to="/home"
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
+                      HOME
+                    </Link>
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{ display: { xs: "none", sm: "block" } }}
+                    style={{ marginRight: "100px" }}
+                  >
+                    <PersonIcon />
+                    <Link
+                      to="/profile"
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
+                      PROFILE
+                    </Link>
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{ display: { xs: "none", sm: "block" } }}
+                  >
+                    <LogoutIcon />
+                    <a
+                      href="/"
+                      onClick={logout}
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
+                      LOGOUT
+                    </a>
+                  </Typography>
+                </>
+              ) : (
+                <>
+                  <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{ display: { xs: "none", sm: "block" } }}
+                    style={{ marginRight: "100px" }}
+                  >
+                    <IconButton size="medium" color="inherit">
+                      <Link
+                        to="/login"
+                        style={{ textDecoration: "none", color: "white" }}
+                      >
+                        SIGN IN
+                      </Link>
+                      <Badge color="error">
+                        <Login />
+                      </Badge>
+                    </IconButton>
+                  </Typography>
+                  <IconButton
+                    size="lmedium"
+                    aria-label="show 4 new mails"
+                    color="inherit"
+                  >
+                    <Badge color="error">
+                      <Link
+                        to="/signup"
+                        style={{ textDecoration: "none", color: "white" }}
+                      >
+                        SIGN UP
+                      </Link>
+                      <AddCircleIcon />
+                    </Badge>
+                  </IconButton>
+                </>
+              )}
+              {/*  */}
+            </Box>
+            <Box sx={{ display: { xs: "flex", md: "none" } }}>
+              <IconButton
+                size="large"
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon />
+              </IconButton>
+            </Box>
+          </Toolbar>
+        </AppBar>
+        {renderMobileMenu}
+        {renderMenu}
+      </Box>
+    </div>
   );
 };
 

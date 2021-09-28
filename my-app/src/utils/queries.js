@@ -1,13 +1,12 @@
 import gql from "graphql-tag";
 
 export const QUERY_POSTS = gql`
-  query posts($username: String) {
-    posts(username: $username) {
-      _id
+  {
+    posts {
+      id
       postText
       createdAt
       username
-      commentCount
       comments {
         _id
         createdAt
@@ -25,7 +24,6 @@ export const QUERY_POST = gql`
       postText
       createdAt
       username
-      commentCount
       comments {
         _id
         createdAt
@@ -36,11 +34,13 @@ export const QUERY_POST = gql`
   }
 `;
 
-export const QUERY_USER = gql`
+const QUERY_USER = gql`
   query user($username: String!) {
     user(username: $username) {
       _id
       username
+      firstName
+      lastName
       email
       posts {
         _id
@@ -51,11 +51,14 @@ export const QUERY_USER = gql`
     }
   }
 `;
+export default QUERY_USER;
 
 export const QUERY_ME = gql`
   {
     me {
       _id
+      fistName
+      lastName
       username
       email
       posts {

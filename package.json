@@ -2,6 +2,7 @@
   "dependencies": {
     "concurrently": "^6.2.1",
     "graphql": "^15.6.0",
+    "if-env": "^1.0.4",
     "nodemon": "^2.0.13"
   },
   "name": "looking-for-group",
