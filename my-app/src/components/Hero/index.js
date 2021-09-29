@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Typography, Button, Container } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import backgroundImage from "./Gamingimg.jpg";
@@ -10,6 +10,7 @@ export default function ProductHero() {
       <div>
         <img
           src={backgroundImage}
+          alt="playing overwatch"
           style={{
             maxWidth: "100%",
             maxHeight: "100%",

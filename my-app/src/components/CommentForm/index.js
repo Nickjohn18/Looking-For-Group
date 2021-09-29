@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-
 import { useMutation } from "@apollo/client";
-import { ADD_POST } from "../../utils/mutations";
+import { ADD_COMMENT } from "../../utils/mutations";
 import { QUERY_POSTS } from "../../utils/queries";
 import Button from "@mui/material/Button";
 
@@ -23,12 +22,12 @@ const useForm = (callback, initialState = {}) => {
   };
 };
 
-const PostForm = () => {
+const CommentForm = () => {
   const { values, onChange, onSubmit } = useForm(createPostCallBack, {
     body: "",
   });
 
-  const [createPost, { error }] = useMutation(ADD_POST, {
+  const [createComment, { error }] = useMutation(ADD_COMMENT, {
     variables: values,
     update(proxy, result) {
       const data = proxy.readQuery({
@@ -37,10 +36,10 @@ const PostForm = () => {
       proxy.writeQuery({
         query: QUERY_POSTS,
         data: {
-          posts: [result.data.posts, ...data.posts],
+          comments: [result.data.comments, ...data.comments],
         },
       });
-      values.commentBody = "";
+      values.commentText = "";
     },
     onError(err) {
       return err;
@@ -48,17 +47,17 @@ const PostForm = () => {
   });
 
   function createPostCallBack() {
-    createPost();
+    createComment();
   }
 
   return (
     <div>
-      <div style={{ width: 700 }}>
+      <div style={{ width: 400 }}>
         <form onSubmit={onSubmit}>
           <textarea
-            name="postText"
-            placeholder="Looking for gamers..."
-            value={values.postText}
+            name="commentText"
+            placeholder="Add your comment..."
+            value={values.commentText}
             className="form-input col-12 col-md-9"
             onChange={onChange}
             style={{ width: "500px", height: "100px", marginLeft: "98px" }}
@@ -91,4 +90,4 @@ const PostForm = () => {
   );
 };
 
-export default PostForm;
+export default CommentForm;

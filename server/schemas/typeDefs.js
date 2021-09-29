@@ -7,7 +7,7 @@ const typeDefs = gql`
     firstName: String
     lastName: String
     email: String
-    post: [Post]
+    posts: [Post]
     comments: [Comment]
   }
 
@@ -21,7 +21,7 @@ const typeDefs = gql`
 
   type Comment {
     _id: ID
-    commentBody: String
+    commentText: String
     createdAt: String
     username: String
   }
@@ -56,7 +56,7 @@ const typeDefs = gql`
     ): User
 
     addPost(postText: String!): Post
-    addComment(postId: ID!, commentBody: String!): Post
+    addComment(postId: ID!, commentText: String!): Post
   }
 `;
 

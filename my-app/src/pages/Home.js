@@ -1,7 +1,5 @@
 import React from "react";
 import Auth from "../utils/auth";
-import { useQuery } from "@apollo/react-hooks";
-import { QUERY_POSTS } from "../utils/queries";
 import ProductHero from "../components/Hero";
 
 //Material UI
@@ -13,9 +11,6 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 //
 
 const Home = () => {
-  const { loading, data } = useQuery(QUERY_POSTS);
-  const posts = data?.posts || [];
-
   const loggedIn = Auth.loggedIn();
 
   return (

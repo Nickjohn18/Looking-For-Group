@@ -29,7 +29,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    userPosts: [
+    posts: [
       {
         type: Schema.Types.ObjectId,
         ref: "Post",
@@ -63,7 +63,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
 };
 
 userSchema.virtual("bookCount").get(function () {
-  return this.userPosts.length;
+  return this.posts.length;
 });
 
 const User = model("User", userSchema);

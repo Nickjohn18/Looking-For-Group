@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 export const QUERY_POSTS = gql`
   {
     posts {
-      id
+      _id
       postText
       createdAt
       username
@@ -11,7 +11,31 @@ export const QUERY_POSTS = gql`
         _id
         createdAt
         username
-        commentBody
+        commentText
+      }
+    }
+  }
+`;
+
+export const QUERY_USERS = gql`
+  {
+    users {
+      _id
+      username
+      firstName
+      lastName
+      email
+      posts {
+        _id
+        postText
+        createdAt
+        username
+        comments {
+          _id
+          commentText
+          createdAt
+          username
+        }
       }
     }
   }
@@ -28,7 +52,7 @@ export const QUERY_POST = gql`
         _id
         createdAt
         username
-        commentBody
+        commentText
       }
     }
   }
@@ -46,7 +70,12 @@ const QUERY_USER = gql`
         _id
         postText
         createdAt
-        commentCount
+        comments {
+          _id
+          commentText
+          createdAt
+          username
+        }
       }
     }
   }
@@ -57,7 +86,7 @@ export const QUERY_ME = gql`
   {
     me {
       _id
-      fistName
+      firstName
       lastName
       username
       email
@@ -65,11 +94,11 @@ export const QUERY_ME = gql`
         _id
         postText
         createdAt
-        commentCount
+        username
         comments {
           _id
+          commentText
           createdAt
-          commentBody
           username
         }
       }

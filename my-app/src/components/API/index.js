@@ -18,7 +18,7 @@ export default function Games() {
     .then(function (data) {
       for (var i = 0; i < data.data.pc.data.length; i++) {
         var gameName = data.data.pc.data[i].game_name;
-        console.log(gameName);
+        gameName = response;
       }
     })
     .catch(function (error) {

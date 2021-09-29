@@ -1,21 +1,18 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
-import Avatar from "@mui/material/Avatar";
+
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { useQuery } from "@apollo/client";
-import QUERY_POSTS from "../../utils/queries";
+import { Box } from "@mui/system";
+import moment from "moment";
+import CommentForm from "../CommentForm/index";
+import Button from "@mui/material/Button";
+import AddCommentIcon from "@mui/icons-material/AddComment";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -28,45 +25,59 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function PostCard() {
+export default function PostCard(props) {
   const [expanded, setExpanded] = React.useState(false);
+  const [openComment, setcommentOpen] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const { data } = useQuery(QUERY_POSTS);
 
-  let user;
-  if (data) {
-    user = data.posts;
-  }
-
+  console.log("Props", props);
+  console.log(props.postText);
   return (
-    <>
+    <Box
+      style={{
+        width: "600px",
+        color: "white",
+        borderBottom: "solid 2px",
+        marginBottom: "50px",
+      }}
+    >
       <div>
-        {user ? (
-          <>
-            <h2>
-              Order History for {user.firstName} {user.lastName}
-            </h2>
-            {user.posts.map((post) => (
-              <div key={post._id} className="my-2">
-                <h3>
-                  {new Date(parseInt(post.createdAt)).toLocaleDateString()}
-                </h3>
-                <div className="flex-row">
-                  {post.posts.map(({ _id, username }, index) => (
-                    <div key={index} className="card px-1 py-1">
-                      <p>{username}</p>
-                      <div></div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </>
-        ) : null}
+        <h1>@{props.username}</h1>
       </div>
-    </>
+      <div style={{ textAlign: "center" }}>
+        <Typography variant="body2" color="white">
+          {props.postText}
+        </Typography>
+      </div>
+      <CardActions disableSpacing>
+        <p>{moment(props.createdAt).fromNow()}</p>
+        <IconButton
+          aria-label="add to favorites"
+          style={{ marginLeft: "350px" }}
+        >
+          <FavoriteIcon style={{ fill: "red" }} />
+        </IconButton>
+        {openComment && <CommentForm />}
+        <AddCommentIcon
+          onClick={() => {
+            setcommentOpen(!openComment);
+          }}
+        />
+        <ExpandMore
+          expand={expanded}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </ExpandMore>
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent></CardContent>
+      </Collapse>
+    </Box>
   );
 }

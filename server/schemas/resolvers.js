@@ -9,23 +9,23 @@ const resolvers = {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
-          .populate("userPosts")
+          .populate("posts")
           .populate("comments");
-
+        console.log(userData);
         return userData;
       }
       throw new AuthenticationError("Please login");
     },
     users: async () => {
-      return User.Find()
+      return User.find()
         .select("-__v -password")
-        .populate("userPosts")
+        .populate("posts")
         .populate("comments");
     },
     user: async (parent, { username }) => {
       return User.findOne({ username })
         .select("-__v -password")
-        .populate("userPosts")
+        .populate("posts")
         .populate("comments");
     },
     posts: async (parent, { username }) => {
@@ -45,7 +45,7 @@ const resolvers = {
     },
 
     login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+      const user = await User.findOne({ email }).populate("posts");
 
       if (!user) {
         throw new AuthenticationError("Incorrect credentials");
@@ -86,13 +86,13 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-    addComment: async (parent, { postId, commentBody }, context) => {
+    addComment: async (parent, { postId, commentText }, context) => {
       if (context.user) {
         const updatedPost = await Post.findOneAndUpdate(
           { _id: postId },
           {
             $push: {
-              comments: { commentBody, username: context.user.username },
+              comments: { commentText, username: context.user.username },
             },
           },
           { new: true, runValidators: true }

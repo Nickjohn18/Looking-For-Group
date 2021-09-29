@@ -6,12 +6,17 @@ db.once("open", async () => {
   await Post.deleteMany({});
 
   await User.deleteMany();
+  var post = await Post.create({
+    postText: "test test work work",
+    username: "pamela",
+  });
 
-  await User.create({
+  var user = await User.create({
     username: "pamela",
     firstName: "Pamela",
     lastName: "Washington",
     email: "pamela@testmail.com",
+    posts: [post._id],
     password: "password12345",
   });
 
@@ -24,11 +29,6 @@ db.once("open", async () => {
   });
 
   console.log("users seeded");
-
-  await Post.create({
-    postText: "test test work work",
-    username: "pamela",
-  });
 
   process.exit();
 });
