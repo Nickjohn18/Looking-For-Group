@@ -6,7 +6,7 @@ import { useQuery } from "@apollo/client";
 export default function PostsList() {
   const { data } = useQuery(QUERY_POSTS);
   const posts = data?.posts || [];
-
+  console.log(posts);
   return (
     <>
       <div>
