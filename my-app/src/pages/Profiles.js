@@ -18,6 +18,7 @@ import { CardContent } from "@mui/material";
 import { Modal } from "@mui/material";
 import { Backdrop } from "@mui/material";
 import { Fade } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -74,7 +75,7 @@ const UserProfile = () => {
           "linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1))",
         backgroundColor: "#78909c",
         color: "white",
-        paddingTop: "50px",
+        paddingTop: "5px",
         paddingBottom: "50px",
       }}
     >
@@ -128,7 +129,7 @@ const UserProfile = () => {
                       aria-label="show more"
                     >
                       <div>
-                        <AddCommentIcon />
+                        <AddCommentIcon style={{ fill: "white" }} />
                       </div>
                     </ExpandMore>
                   </CardActions>
@@ -137,7 +138,12 @@ const UserProfile = () => {
                       <div
                         style={{ textAlign: "center", bottomMargin: "20px" }}
                       >
-                        <h1>Comments</h1>
+                        {posts.comments.map((comment) => (
+                          <div style={{ borderTop: "1px solid" }}>
+                            <h2>@{comment.username}</h2>
+                            <p>{comment.commentText}</p>
+                          </div>
+                        ))}
                       </div>
                     </CardContent>
                   </Collapse>

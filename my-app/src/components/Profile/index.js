@@ -10,6 +10,7 @@ import { IconButton } from "@mui/material";
 
 import { QUERY_ME_BASIC } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
+import FriendList from "../FriendList";
 
 export default function Profile() {
   const { loading, data, error } = useQuery(QUERY_ME_BASIC);

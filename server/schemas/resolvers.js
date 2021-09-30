@@ -72,6 +72,18 @@ const resolvers = {
 
       throw new AuthenticationError("You need to be logged in!");
     },
+
+    async deletePost(_, { postId }, context) {
+      const user = signToken(context);
+      const post = await Post.findById(postId);
+      if (user.username === post.username) {
+        await post.delete();
+        return "Post deleted successfully";
+      } else {
+        throw new AuthenticationError("Action not allowed");
+      }
+    },
+
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, {
@@ -94,6 +106,19 @@ const resolvers = {
         );
 
         return updatedPost;
+      }
+
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    addFriend: async (parent, { friendId }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { friends: friendId } },
+          { new: true }
+        ).populate("friends");
+
+        return updatedUser;
       }
 
       throw new AuthenticationError("You need to be logged in!");

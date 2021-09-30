@@ -6,6 +6,7 @@ import { useQuery } from "@apollo/react-hooks";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import useContext from "react";
 
 import { Box } from "@mui/system";
 import moment from "moment";
@@ -14,6 +15,9 @@ import AddCommentIcon from "@mui/icons-material/AddComment";
 import { makeStyles } from "@material-ui/core/styles";
 import { QUERY_POST, QUERY_POSTS } from "../../utils/queries";
 import { Link } from "react-router-dom";
+import { QUERY_ME } from "../../utils/queries";
+import DeleteButton from "../DeleteButton";
+import AuthService from "../../utils/mutations";
 
 //
 const useStyles = makeStyles((theme) => ({
@@ -40,13 +44,8 @@ export default function PostCard(props) {
   const [open, setOpen] = React.useState(false);
 
   const { loading, data, error } = useQuery(QUERY_POST);
-  // const { loading, data, error } = useQuery(QUERY_POST, {
-  //   variables: { id: postId },
-  // });
-  // React.useEffect(() => console.log(data || error), [data, loading, error]);
-  const post = data?.post || {};
+  const user = data?.me || {};
 
-  console.log(props);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -89,6 +88,7 @@ export default function PostCard(props) {
         <IconButton as={Link} to={`/posts/${props._id}`}>
           <AddCommentIcon style={{ fill: "white" }} />
         </IconButton>
+        {/* <LikeButton user={user} post={{ id, likeCount, likes }} /> */}
       </CardActions>
     </Box>
   );

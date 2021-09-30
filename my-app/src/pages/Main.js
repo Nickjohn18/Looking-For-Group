@@ -3,7 +3,7 @@ import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import FaceIcon from "@mui/icons-material/Face";
 import { Container } from "@mui/material";
-
+import { useState } from "react";
 import { Box } from "@mui/system";
 
 import Profile from "../components/Profile";
@@ -13,30 +13,33 @@ import PostList from "../components/PostsList";
 var axios = require("axios").default;
 
 const Home = () => {
-  let response = [];
-  var options = {
-    method: "GET",
-    url: "https://whatoplay.p.rapidapi.com/platform",
-    params: { platform: "pc", count: "10" },
-    headers: {
-      "x-rapidapi-host": "whatoplay.p.rapidapi.com",
-      "x-rapidapi-key": "4ee5b59d12msh903605515e7a564p1a6d32jsnd4cc21b6c460",
-    },
-  };
-
-  axios
-    .request(options)
-    .then(function (data) {
-      for (var i = 0; i < data.data.pc.data.length; i++) {
-        var gameName = data.data.pc.data[i];
-        response.push(gameName);
-      }
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
-  console.log(response);
-
+  const [games, setGames] = React.useState([]);
+  React.useEffect(() => {
+    let response = [];
+    var options = {
+      method: "GET",
+      url: "https://whatoplay.p.rapidapi.com/platform",
+      params: { platform: "pc", count: "10" },
+      headers: {
+        "x-rapidapi-host": "whatoplay.p.rapidapi.com",
+        "x-rapidapi-key": "4ee5b59d12msh903605515e7a564p1a6d32jsnd4cc21b6c460",
+      },
+    };
+    axios
+      .request(options)
+      .then(function ({ data }) {
+        const pcDataArray = data.pc.data;
+        for (var i = 0; i < pcDataArray.length; i++) {
+          console.log(pcDataArray[0].game_name.boxart);
+          var gameName = pcDataArray[i].game_name;
+          response.push({ gameName });
+        }
+        setGames(response);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }, []);
   return (
     <main
       style={{
@@ -89,20 +92,21 @@ const Home = () => {
             position: "sticky",
             border: "1px solid",
             borderRadius: "25px",
-            height: "800px",
+            height: "1000px",
             width: "350px",
             top: "10px",
             marginTop: "30px",
           }}
         >
-          <h1>Games go here</h1>
-          <h1>Helllo</h1>
-          {response.forEach((games) => (
-            <>
-              <div>{games.game_name}</div>
-              <p>not working</p>
-            </>
-          ))}
+          <div stlye={{ marginLeft: "20px" }}>
+            <h1>Popular Games:</h1>
+            {games.map((game, index) => (
+              <div key={index}>
+                <h2>{game.gameName}</h2>
+                <img src={game.gameName.boxart}></img>
+              </div>
+            ))}
+          </div>
         </div>
       </Box>
     </main>

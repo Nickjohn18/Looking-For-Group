@@ -60,6 +60,11 @@ const QUERY_USER = gql`
       firstName
       lastName
       email
+      friendCount
+      friends {
+        id
+        username
+      }
       posts {
         _id
         postText

@@ -11,10 +11,12 @@ import Profile from "../components/Profile";
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import moment from "moment";
-
+import Avatar from "@mui/material/Avatar";
+import blankProfile from "../components/Profile/blankprofile.png";
+import GroupIcon from "@mui/icons-material/Group";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import { makeStyles } from "@material-ui/core/styles";
-
+import { Badge } from "@mui/material";
 import { Link } from "react-router-dom";
 import { QUERY_POST } from "../utils/queries";
 
@@ -65,7 +67,58 @@ export default function SinglePost(props) {
         }}
       >
         <div style={{ paddingBottom: "60px", paddingLeft: "70px" }}>
-          <Profile />
+          <div
+            style={{
+              border: "1px solid",
+              marginTop: "30px",
+              borderRadius: "25px",
+              marginLeft: "40px",
+            }}
+          >
+            <Container fixed>
+              <Box
+                style={{
+                  width: "400px",
+                  height: "600px",
+                  paddingTop: "10px",
+                }}
+              >
+                <div>
+                  <Avatar
+                    sx={{ width: "400px", height: "300px" }}
+                    variant="square"
+                    src={blankProfile}
+                  >
+                    N
+                  </Avatar>
+                </div>
+                <div>
+                  <h1 style={{ fontSize: "60px" }}>@{username}</h1>
+                </div>
+                <div style={{ borderBottom: "1px solid" }}>
+                  <h2></h2>
+                </div>
+                <div>
+                  <Box style={{ display: "flex" }}>
+                    <Button
+                      style={{
+                        color: "white",
+                        fontSize: "30px",
+                        paddingTop: "40px",
+                      }}
+                    >
+                      Add Friend
+                    </Button>
+                    <div style={{ paddingTop: "25px", paddingLeft: "40px" }}>
+                      <Badge badgeContent={1000} overlap="circular">
+                        <GroupIcon sx={{ fontSize: 60, fill: "white" }} />
+                      </Badge>
+                    </div>
+                  </Box>
+                </div>
+              </Box>
+            </Container>
+          </div>
         </div>
         <div style={{ marginLeft: "300px" }}>
           <Box
