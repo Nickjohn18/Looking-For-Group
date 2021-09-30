@@ -4,90 +4,62 @@ import { ADD_COMMENT } from "../../utils/mutations";
 import { QUERY_POSTS } from "../../utils/queries";
 import Button from "@mui/material/Button";
 
-const useForm = (callback, initialState = {}) => {
-  const [values, setValues] = useState(initialState);
+const CommentForm = ({ postId }) => {
+  const [commentText, setBody] = useState("");
+  const [characterCount, setCharacterCount] = useState(0);
+  const [addComment, { error }] = useMutation(ADD_COMMENT);
 
-  const onChange = (event) => {
-    setValues({ ...values, [event.target.name]: event.target.value });
+  // update state based on form input changes
+  const handleChange = (event) => {
+    if (event.target.value.length <= 280) {
+      setBody(event.target.value);
+      setCharacterCount(event.target.value.length);
+    }
   };
-  const onSubmit = (event) => {
+
+  // submit form
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
-    callback();
-  };
 
-  return {
-    onChange,
-    onSubmit,
-    values,
-  };
-};
-
-const CommentForm = () => {
-  const { values, onChange, onSubmit } = useForm(createPostCallBack, {
-    body: "",
-  });
-
-  const [createComment, { error }] = useMutation(ADD_COMMENT, {
-    variables: values,
-    update(proxy, result) {
-      const data = proxy.readQuery({
-        query: QUERY_POSTS,
+    try {
+      await addComment({
+        variables: { commentText, postId },
       });
-      proxy.writeQuery({
-        query: QUERY_POSTS,
-        data: {
-          comments: [result.data.comments, ...data.comments],
-        },
-      });
-      values.commentText = "";
-    },
-    onError(err) {
-      return err;
-    },
-  });
 
-  function createPostCallBack() {
-    createComment();
-  }
+      // clear form value
+      setBody("");
+      setCharacterCount(0);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <div>
-      <div style={{ width: 400 }}>
-        <form onSubmit={onSubmit}>
-          <textarea
-            name="commentText"
-            placeholder="Add your comment..."
-            value={values.commentText}
-            className="form-input col-12 col-md-9"
-            onChange={onChange}
-            style={{ width: "500px", height: "100px", marginLeft: "98px" }}
-          ></textarea>
-          {/* <TextField
-            label="Post"
-            id="standard-size-small"
-            defaultValue="Large"
-            size="Large"
-            variant="standard"
-            name="postText"
-            onChange={onChange}
-          /> */}
-          <Button
-            variant="contained"
-            size="medium"
-            type="submit"
-            style={{ Top: "40px" }}
-          >
-            Submit
-          </Button>
-        </form>
-        {error && (
-          <div>
-            <ul>{/* <li>{error.graphQLErrors[0].message}</li> */}</ul>
-          </div>
-        )}
-      </div>
+      <p
+        className={`m-0 ${characterCount === 280 || error ? "text-error" : ""}`}
+      >
+        Character Count: {characterCount}/280
+        {error && <span className="ml-2">Something went wrong...</span>}
+      </p>
+      <form
+        className="flex-row justify-center justify-space-between-md align-stretch"
+        onSubmit={handleFormSubmit}
+      >
+        <textarea
+          placeholder="Leave a reaction to this thought..."
+          value={commentText}
+          className="form-input col-12 col-md-9"
+          onChange={handleChange}
+        ></textarea>
+
+        <button className="btn col-12 col-md-3" type="submit">
+          Submit
+        </button>
+      </form>
+
+      {error && <div>Something went wrong...</div>}
     </div>
   );
 };
-
 export default CommentForm;

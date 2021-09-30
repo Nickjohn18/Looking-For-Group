@@ -30,16 +30,6 @@ const Home = () => {
           <Profile />
           <Container style={{ backgroundColor: "" }}>
             <Box>
-              <h3>TAGS</h3>
-              <Stack direction="row" spacing={1}>
-                <Chip icon={<FaceIcon />} label="With Icon" />
-                <Chip
-                  icon={<FaceIcon />}
-                  label="With Icon"
-                  variant="outlined"
-                />
-                <Chip icon={<FaceIcon />} label="With Icon" />
-              </Stack>
               {/* <h3>Interest</h3>
               <h3>Friends</h3>
               <h3>Games</h3>
@@ -70,7 +60,17 @@ const Home = () => {
         </div>
       </div>
       <Box sx={{ height: 1100, width: 300 }}>
-        <div style={{ position: "fixed" }}>
+        <div
+          style={{
+            position: "sticky",
+            border: "1px solid",
+            borderRadius: "25px",
+            height: "800px",
+            width: "350px",
+            top: "10px",
+            marginTop: "30px",
+          }}
+        >
           <h1>Games go here</h1>
           <Games />
         </div>

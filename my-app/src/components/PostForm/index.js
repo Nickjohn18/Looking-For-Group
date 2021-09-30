@@ -34,6 +34,7 @@ const PostForm = () => {
       const data = proxy.readQuery({
         query: QUERY_POSTS,
       });
+      data.posts = [result.data.posts, ...data.posts];
       proxy.writeQuery({
         query: QUERY_POSTS,
         data: {
@@ -61,25 +62,25 @@ const PostForm = () => {
             value={values.postText}
             className="form-input col-12 col-md-9"
             onChange={onChange}
-            style={{ width: "500px", height: "100px", marginLeft: "98px" }}
+            style={{
+              width: "500px",
+              height: "70px",
+              marginLeft: "98px",
+              borderColor: "transparent",
+              outline: "none",
+              border: "none",
+            }}
           ></textarea>
-          {/* <TextField
-            label="Post"
-            id="standard-size-small"
-            defaultValue="Large"
-            size="Large"
-            variant="standard"
-            name="postText"
-            onChange={onChange}
-          /> */}
-          <Button
-            variant="contained"
-            size="medium"
-            type="submit"
-            style={{ Top: "40px" }}
-          >
-            Submit
-          </Button>
+          <div style={{ marginLeft: "300px" }}>
+            <Button
+              variant="contained"
+              size="medium"
+              type="submit"
+              style={{ Top: "40px" }}
+            >
+              SHARE
+            </Button>
+          </div>
         </form>
         {error && (
           <div>
