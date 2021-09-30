@@ -1,33 +1,19 @@
-import * as React from "react";
-import { styled } from "@mui/material/styles";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
+import React from "react";
 
+import CardActions from "@mui/material/CardActions";
+
+import { useQuery } from "@apollo/react-hooks";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 import { Box } from "@mui/system";
 import moment from "moment";
-import CommentForm from "../CommentForm/index";
-import Button from "@mui/material/Button";
-import AddCommentIcon from "@mui/icons-material/AddComment";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import { makeStyles } from "@material-ui/core/styles";
 
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
+import AddCommentIcon from "@mui/icons-material/AddComment";
+import { makeStyles } from "@material-ui/core/styles";
+import { QUERY_POST, QUERY_POSTS } from "../../utils/queries";
+import { Link } from "react-router-dom";
 
 //
 const useStyles = makeStyles((theme) => ({
@@ -50,11 +36,17 @@ export default function PostCard(props) {
   const [expanded, setExpanded] = React.useState(false);
   const [openComment, setcommentOpen] = React.useState(false);
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
+  const { loading, data, error } = useQuery(QUERY_POST);
+  // const { loading, data, error } = useQuery(QUERY_POST, {
+  //   variables: { id: postId },
+  // });
+  // React.useEffect(() => console.log(data || error), [data, loading, error]);
+  const post = data?.post || {};
+
+  console.log(props);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -77,7 +69,9 @@ export default function PostCard(props) {
       }}
     >
       <div>
-        <h1>@{props.username}</h1>
+        <h1 as={Link} to={`/profile/$`}>
+          @{props.username}
+        </h1>
       </div>
       <div style={{ textAlign: "left" }}>
         <Typography variant="body2" color="white">
@@ -92,52 +86,10 @@ export default function PostCard(props) {
         >
           <FavoriteIcon style={{ fill: "red" }} />
         </IconButton>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <div>
-            <AddCommentIcon />
-          </div>
-        </ExpandMore>
+        <IconButton as={Link} to={`/posts/${props._id}`}>
+          <AddCommentIcon style={{ fill: "white" }} />
+        </IconButton>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <div style={{ textAlign: "center", bottomMargin: "20px" }}>
-            {/* {openComment && <CommentForm />} */}
-            <Button
-              variant="contained"
-              onClick={() => {
-                setcommentOpen(!openComment);
-                handleOpen();
-              }}
-            >
-              comment
-            </Button>
-
-            <Modal
-              aria-labelledby="transition-modal-title"
-              aria-describedby="transition-modal-description"
-              className={classes.modal}
-              open={open}
-              onClose={handleClose}
-              closeAfterTransition
-              BackdropComponent={Backdrop}
-              BackdropProps={{
-                timeout: 500,
-              }}
-            >
-              <Fade in={open}>
-                <div className={classes.paper}>
-                  {openComment && <CommentForm />}
-                </div>
-              </Fade>
-            </Modal>
-          </div>
-        </CardContent>
-      </Collapse>
     </Box>
   );
 }

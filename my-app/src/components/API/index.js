@@ -18,17 +18,13 @@ export default function Games() {
     .then(function (data) {
       for (var i = 0; i < data.data.pc.data.length; i++) {
         var gameName = data.data.pc.data[i].game_name;
-        console.log(gameName);
+        response.push(gameName);
       }
     })
     .catch(function (error) {
       console.error(error);
     });
-  return (
-    <>
-      <div>
-        <h1>{response}</h1>
-      </div>
-    </>
-  );
+  console.log(response);
+
+  return <>{response && response.map((game) => <h1>@Games{game}</h1>)}</>;
 }

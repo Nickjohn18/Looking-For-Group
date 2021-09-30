@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const postSchema = require("./Post");
+const Post = require("./Post");
 const bcrypt = require("bcrypt");
 
 const userSchema = new Schema(
@@ -35,12 +35,6 @@ const userSchema = new Schema(
         ref: "Post",
       },
     ],
-    comments: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
   },
   {
     toJSON: {
@@ -62,7 +56,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-userSchema.virtual("bookCount").get(function () {
+userSchema.virtual("friendCount").get(function () {
   return this.posts.length;
 });
 

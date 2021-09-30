@@ -8,11 +8,35 @@ import { Box } from "@mui/system";
 
 import Profile from "../components/Profile";
 import PostForm from "../components/PostForm";
-import Games from "../components/API";
 
 import PostList from "../components/PostsList";
+var axios = require("axios").default;
 
 const Home = () => {
+  let response = [];
+  var options = {
+    method: "GET",
+    url: "https://whatoplay.p.rapidapi.com/platform",
+    params: { platform: "pc", count: "10" },
+    headers: {
+      "x-rapidapi-host": "whatoplay.p.rapidapi.com",
+      "x-rapidapi-key": "4ee5b59d12msh903605515e7a564p1a6d32jsnd4cc21b6c460",
+    },
+  };
+
+  axios
+    .request(options)
+    .then(function (data) {
+      for (var i = 0; i < data.data.pc.data.length; i++) {
+        var gameName = data.data.pc.data[i];
+        response.push(gameName);
+      }
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+  console.log(response);
+
   return (
     <main
       style={{
@@ -72,7 +96,13 @@ const Home = () => {
           }}
         >
           <h1>Games go here</h1>
-          <Games />
+          <h1>Helllo</h1>
+          {response.forEach((games) => (
+            <>
+              <div>{games.game_name}</div>
+              <p>not working</p>
+            </>
+          ))}
         </div>
       </Box>
     </main>

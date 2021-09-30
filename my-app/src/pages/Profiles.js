@@ -18,7 +18,6 @@ import { CardContent } from "@mui/material";
 import { Modal } from "@mui/material";
 import { Backdrop } from "@mui/material";
 import { Fade } from "@mui/material";
-import CommentForm from "../components/CommentForm";
 
 const useStyles = makeStyles((theme) => ({
   modal: {

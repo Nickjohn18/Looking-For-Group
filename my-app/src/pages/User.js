@@ -49,7 +49,7 @@ export default function Profile() {
               <Box>
                 <IconButton>
                   <GroupIcon sx={{ fontSize: 60, fill: "white" }} />
-                  <h3 style={{ color: "white" }}>10 Friends</h3>
+                  10 Friends
                 </IconButton>
               </Box>
             </div>

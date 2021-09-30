@@ -41,7 +41,7 @@ const PostForm = () => {
           posts: [result.data.posts, ...data.posts],
         },
       });
-      values.commentBody = "";
+      values.postText = "";
     },
     onError(err) {
       return err;

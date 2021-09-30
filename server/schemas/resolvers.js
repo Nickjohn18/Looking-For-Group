@@ -9,24 +9,19 @@ const resolvers = {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
-          .populate("posts")
-          .populate("comments");
+          .populate("posts");
         console.log(userData);
         return userData;
       }
       throw new AuthenticationError("Please login");
     },
     users: async () => {
-      return User.find()
-        .select("-__v -password")
-        .populate("posts")
-        .populate("comments");
+      return User.find().select("-__v -password").populate("posts");
     },
     user: async (parent, { username }) => {
       return User.findOne({ username })
         .select("-__v -password")
-        .populate("posts")
-        .populate("comments");
+        .populate("posts");
     },
     posts: async (parent, { username }) => {
       const params = username ? { username } : {};
